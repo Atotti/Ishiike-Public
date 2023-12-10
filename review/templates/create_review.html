@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}クチコミ作成 | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'review:review_list' %}" class="section">クチコミリスト</a>
+            >
+            <a class="active section">クチコミ作成</a>
+        </div>
+            <div class="content">
+                <div class="header"><h3>クチコミ作成</h3></div>
+                    <form class="ui form" action="{% url 'review:create_review' %}" method="POST">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                    <button class="ui button" type="submit" name="next" value="confirm">作成</button>
+                    </form>
+            </div>
+    </div>
+    {% if not request.user_agent.is_mobile %}
+        {% include 'sidebar.html' %}
+    {% endif %}
+</div>
+{% endblock %}

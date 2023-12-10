@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block title %}検索 | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="ten wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'review:review_list' %}" class="section">クチコミリスト</a>
+            >
+            <a class="active section">検索</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header">
+                    <h3>クチコミのタイトルを検索</h3>
+                    <form method="GET" action="{% url 'review:search'%}">
+                        <div class="ui fluid action input">
+                            <input type="text" name="q" value="{{request.GET.q}}">
+                            <button class="ui button" type="submit" value="search">検索</button>
+                        </div>
+                    </form>
+                    <div class="content">
+                    </div>
+                    {% if query %}
+                    <b>{{reviews.count}}件見つかりました</b>
+                    {% endif %}
+                </div>
+                <div class="ui divided items">
+                    {% for review in reviews_list %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">
+                                <a href="{% url 'review:review' pk=review.id %}"><h4>{{ review.title }}</h4></a>
+                            </div>
+                            <div class="meta">
+                                <div class="description">{{ review.content | truncatechars:20}}</div>
+                            </div>
+                            <div class="meta">
+                                <span class="name">{{ review.semester }}</span>
+                                <span class="name">{{ review.day }}</span>
+                                <span class="name">{{ review.period }}</span>
+                                <span class="date">{{ review.created_at }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- モバイル版のカスタムサイドバー -->
+    {% if not request.user_agent.is_mobile %}
+        {% include 'sidebar.html' %}
+        {% include 'ad.html' %}
+
+    {% else %}
+        <div class="five wide column">
+            <div class="ui segment">
+                <div class="content">
+                    <div class="header"><h4>開講</h4></div>
+                    <div class="ui relaxed list small divided link">
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/semester/1/">前期</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/semester/2/">後期</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/semester/3/">通年</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/semester/4/">その他（開講）</a>
+                    </div>
+        
+                    <div class="header"><h4>曜日</h4></div>
+                    <div class="ui relaxed list small divided link">
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/1/">月曜日</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/2/">火曜日</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/3/">水曜日</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/4/">木曜日</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/5/">金曜日</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/day/6/">その他</a>
+                    </div>
+        
+                    <div class="header"><h4>時限</h4></div>
+                    <div class="ui relaxed list small divided link">
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/1/">1限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/2/">2限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/3/">3限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/4/">4限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/5/">5限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/6/">6限目</a>
+                        <a class="item" href="{{ request.scheme }}://{{ request.get_host }}/period/7/">その他</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ui items">
+                <div class="item">
+                    <a href="{% url 'review:review_list' %}" class="ui fluid teal basic button">クチコミリストへ戻る</a>
+                </div>
+                <div class="item">
+                    <a href="{% url 'review:create_review' %}" class="ui fluid teal button">クチコミを作成</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+</div>
+{% endblock %}

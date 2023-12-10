@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}石池 | Ishiike{% endblock %}
+{% load static %}
+{% block contents %}
+<div class="index">
+    <div class="index-wrapper">
+        <div class="index-detail">
+            <h2 class="index-subtitle">都立大生向け情報共有サイト</h2>
+            <h1 class="index-title">石池<br>Ishiike</h1>
+            <div class="ui items">
+                <div class="ui item">
+                    <a href="{% url 'review:about' %}" class="ui fluid teal basic button" id="index-botton"><h4>石池とは</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'review:howto' %}" class="ui fluid teal basic button" id="index-botton"><h4>使い方</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'review:review_list' %}" class="ui fluid teal button" id="index-botton"><h4>クチコミリスト</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'search_syllabus:search' %}" class="ui fluid teal button" id="index-botton"><h4>シラバス検索システム</h4></a>
+                </div>
+            </div>
+        </div>
+        <div class="index-img">
+            <img src="{% static 'img/tanni.png' %}" class="index-image">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

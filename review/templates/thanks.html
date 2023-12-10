@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}感謝感謝〜 | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'review:review_list' %}" class="section">クチコミリスト</a>
+            >
+            <a class="active section">thanks!</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>クチコミ作成完了！</h3></div>
+                あなたのクチコミが未来の履修者の助けになりました！<br>
+                クチコミありがとうございました！またのご利用お待ちしております！<br>
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>{{review.title}}</h3></div>
+                <p>{{review.semester}} - {{review.day}} - {{review.period}} - {{review.created_at}}</p>
+                <div class="ui segment">
+                    <div style='font-family: "Segoe UI",Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;'>{{review.content | linebreaks}}</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class ="content">
+                <div class="header"><h3>クチコミを共有する</h3></div>
+                ツイートしてあなたがクチコミを書き込んだ事を共有しましょう！<br><br>
+                <div class="ui item">
+                    <a href="https://twitter.com/intent/tweet?text=都立大生向け情報共有サイト「石池」に『{{review.title}}』のクチコミを書き込みました！&via=ishiike_&hashtags=石池&url={{ request.scheme }}://{{ request.get_host }}/{{review.id}}" class="ui twitter button" id="index-botton" target="_blank"><h4><i class="twitter icon"></i>ツイートする</h4></a>
+                </div>
+            </div>
+        </div>
+        <div class="ui items">
+            <div class="ui item">
+                <a href="{% url 'review:index' %}" class="ui fluid teal basic button" id="index-botton"><h4>トップへ戻る</h4></a>
+            </div>
+        </div>
+
+    </div>
+    {% include 'sidebar.html' %}
+</div>
+{% endblock %}

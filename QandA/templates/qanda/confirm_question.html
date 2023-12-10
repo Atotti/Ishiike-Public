@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}質問作成（確認） | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'review:review_list' %}" class="section"></a>
+            >
+            <a class="active section">質問作成</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>質問作成</h3></div>
+                <p>内容を確認してください</p>
+                <table  class="ui celled table table table-hover" >
+                    <tr><td>本文</td><td><div style='font-family: "Segoe UI",Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;'>{{form.content.value | linebreaks}}</div></td></tr>
+                    <tr><td>カテゴリ</td><td><div class="ui label">{{ form.tag.value }}</div></td></tr>
+                </table>
+                <form class="ui form" action="{% url 'review:create_review' %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field.as_hidden }}
+                    {% endfor %}
+                    <button class="ui button grey" type="submit" name="next" value="back">戻る</button>
+                    <button class="ui button orange" type="submit" name="next" value="create">クチコミする！</button>
+                </form>
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="header"><h3>その前に...</h3></div>
+            同じような質問が書き込まれていませんか?<br>
+            質問を送る前に良く確認してから送るようにしてください🙇🙇
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+</div>
+{% endblock %}

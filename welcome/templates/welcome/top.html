@@ -1,0 +1,39 @@
+{% extends 'welcome/base.html' %}
+{% block title %}新入生向けサイト{% endblock %}
+{% block contents %}
+
+<div class="index">
+    <div class="index-wrapper">
+        <div class="index-detail">
+            <h2 class="index-subtitle">Top</h2>
+            <h1 class="index-title">新入生向けWiki<br></h1>
+            <div class="ui items">
+                <div class="ui item">
+                    <a href="{% url 'welcome:top' %}" class="ui fluid teal basic button" id="index-botton"><h4>トップ</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:orverview' %}" class="ui fluid teal button" id="index-botton"><h4>履修概要</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:attention' %}" class="ui fluid teal button" id="index-botton"><h4>注意</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:what' %}" class="ui fluid teal button" id="index-botton"><h4>履修とは？単位とは？GPAとは？</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:minor' %}" class="ui fluid teal button" id="index-botton"><h4>教職課程・学芸員課程・副専攻</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:timetable' %}" class="ui fluid teal button" id="index-botton"><h4>時間割の組み方</h4></a>
+                </div>
+                <div class="ui item">
+                    <a href="{% url 'welcome:exampletimetable' %}" class="ui fluid teal button" id="index-botton"><h4>2022年度先輩の時間割</h4></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

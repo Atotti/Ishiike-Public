@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title1 %}{{review.title}}{% endblock %}
+{% block title %}{{review.title}} | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a href="{% url 'review:review_list' %}" class="section">クチコミリスト</a>
+            >
+            <!--<i class="right angle icon divider"></i>-->
+            <a class="active section">{{review.title}}</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>{{review.title}}</h3></div>
+                <p>{{review.semester}} - {{review.day}}曜 - {{review.period}}限 - {{review.created_at}}</p>
+                <div class="ui segment">
+                    <div style='font-family: "Segoe UI",Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;'>{{review.content | linebreaks}}</div>
+                </div>
+                <div class="ui right aligned grid">
+                    <div class="wide column">
+                        {% if liked %}
+                        <div class="vote_button" style="cursor: pointer;" data-review-id="{{review.id}}" data-count="{{review.vote_count}}">
+                            <div class="ui labeled button" tabindex="0">
+                                <button class="ui red button" id="btutton color">
+                                    <i class="heart icon"></i> 参考になった
+                                </button>
+                                <a class="ui basic red left pointing label" id="border color">
+                                    <span class="vote_counter">
+                                        {% if review.vote_count > 0 %}{{review.vote_count}}{% endif %}
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="vote_button" style="cursor: pointer;" data-review-id="{{review.id}}" data-count="{{review.vote_count}}">
+                            <div class="ui labeled button" tabindex="0">
+                                <button class="ui toggle button" id="btutton color">
+                                    <i class="heart icon"></i> 参考になった
+                                </button>
+                                <a class="ui basic label" id="border color">
+                                    <span class="vote_counter">
+                                        {% if review.vote_count > 0 %}{{review.vote_count}}{% endif %}
+                                    </span>
+                                </a>
+                            </div>
+                            <script>
+                                border = document.getElementById('border color');
+                                document.getElementById('btutton color').addEventListener('click', 
+                                function () {
+                                    this.className = 'ui red button';
+                                    border.className = 'ui basic red left pointing label';
+                                }
+                                )
+                            </script>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui right aligned grid">
+            <div class="wide column">
+                <div class="ui small basic icon buttons">
+                    <a class="ui button" data-tooltip="この授業の他のクチコミを見る" data-inverted="" href="{% url 'review:search'%}?q={{review.title}}"><i class="list ol icon"></i></a>
+                    <a class="ui button" data-tooltip="この授業のシラバスを見る" data-inverted="" href="{% url 'search_syllabus:search' %}?q={{review.title}}"><i class="newspaper outline icon"></i></a>
+                </div>
+                <a>　</a>
+                <a class="ui twitter button" href="https://twitter.com/intent/tweet?text=『{{review.title}}』のクチコミ &via=ishiike_ &hashtags=石池&url={{ request.scheme }}://{{ request.get_host }}/{{review.id}}" target="_blank">
+                    <i class="twitter icon"></i>
+                    共有
+                </a>
+            </div>
+        </div>
+        <!-- コメント表示 -->
+        <div class="ui segment">
+            <div class="header"><h3>コメント</h3></div>
+            {% if comment_list %}
+            <div class="ui relaxed divided list">
+            {% for comment in comment_list %}
+                <div class="item">
+                    <div class="content">
+                        <div class="description"><font color="gray" size="2">{{comment.no}} : {{comment.created_at}}</font></div>
+                        <p>{{comment.comment | linebreaks}}</p>
+                    </div>
+                </div>     
+            {% endfor %}
+            </div>
+            {% else %}
+            <p>まだコメントはありません</p>
+            {% endif %}
+        </div>
+        <!-- コメント表示終わり -->
+        <!-- コメント投稿 -->
+        <div class="ui segment">
+            <form class="ui form" action="" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="ui button orange" type="submit">コメントする</button>
+            </form>
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+</div>
+{% endblock %}

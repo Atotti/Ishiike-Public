@@ -1,0 +1,124 @@
+.head {
+    background-color: black;
+}
+
+.index {
+    font-size: 100%;
+    line-height: 1.7;
+    letter-spacing: 1px;
+    margin: 10% 0 0 0;
+    padding: 0;
+}
+
+.index-wrapper {
+    max-width: 10%;
+    min-width: 77%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 7%;
+}
+
+.index-detail {
+    width: 100%;
+    min-width: 65%;
+    margin-top: -5%;
+}
+
+.index-detail .index-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.index-detail .index-title {
+    font-size: 54px;
+    line-height: 120%;
+    letter-spacing: 1%;
+    margin-bottom: 10%;
+}
+
+#index-botton {
+    width: 50%;
+}
+
+.index .index-image {
+    width: 100%;
+    text-align: center;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-size: 100%;
+}
+
+.ui.menu .item {
+    position: relative;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: none;
+    padding: 0.6em 1.14285714em;
+    text-transform: none;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: normal;
+    -webkit-transition: background 0.1s ease, color 0.1s ease, -webkit-box-shadow 0.1s ease;
+    transition: background 0.1s ease, color 0.1s ease, -webkit-box-shadow 0.1s ease;
+    transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
+    transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease, -webkit-box-shadow 0.1s ease;
+}
+
+@media screen and (max-width: 599px) {
+    .index {
+        font-size: 100%;
+        line-height: 1.7;
+        letter-spacing: 1px;
+        margin: 20% 0 0 0;
+        padding: 0;
+    }
+    .index-wrapper {
+        max-width: 10%;
+        min-width: 70%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .index-detail {
+        width: 100%;
+        min-width: 65%;
+        margin-top: -5%;
+    }
+    .index-detail .index-subtitle {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+    .index-detail .index-title {
+        font-size: 54px;
+        line-height: 120%;
+        letter-spacing: 1%;
+        margin-bottom: 10%;
+    }
+    #index-botton {
+        width: 70%;
+    }
+    .index .index-image {
+        width: 150%;
+        text-align: center;
+    }
+}
+html {
+    overflow-x: hidden;
+    overflow-y: scroll; -webkit-overflow-scrolling: touch
+    }

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}使い方 | Ishiike{% endblock %}
+{% load static %}
+{% block contents %}
+<div class="about">
+    <div class="about-wrapper">
+        <div class="about-detail">
+            <h1 class="about-title">使い方</h1>
+            <h1 class="index-subtitle">閲覧する</h1>
+            <p>
+                　トップページの<a href="{% url 'review:review_list'%}">クチコミリスト</a>から全クチコミのリストが見れます。右側のサイドバー（スマホなら上部メニュー）から開講、曜日、時限などの条件を指定したリストを表示したサイトへ飛びます。
+            </p>
+            <h1 class="index-subtitle">クチコミする</h1>
+            <p>
+                　サイドバーの<a href="{% url 'review:create_review' %}">クチコミを作成</a>からクチコミを作成するページへ移動できます。作成には授業名、開講、曜日、時限、本文を入力して下部の作成ボタンを押すことで確認画面へと移動します。内容が確認できればもう一度下部の作成ボタンを押すことでクチコミが完了します。訂正したい箇所があれば戻るボタンで編集画面へと戻ることが出来ます。
+            </p>
+            <h1 class="index-subtitle">クチコミを探す</h1>
+            <p>
+                　上部ヘッダーの<a href="{% url 'review:search' %}">クチコミを検索</a>からクチコミを検索することができます。検索にはなるべく正式名称を用いてください。例えば「プロ基礎」ではなく「プログラミング基礎」と検索してください。
+            </p>
+            <h1 class="index-subtitle">関連機能</h1>
+            <p>石池には授業クチコミ以外にも様々な情報が集まっています。</p>
+            <h3 class="index-subtitle"><div href="{% url 'search_syllabus:search' %}">シラバス検索システム</div></h3>
+            <p>
+                　石池に大学のシラバスを検索を簡単に検索出来る<a href="{% url 'search_syllabus:search' %}">シラバス検索システム</a>を設けました。ぜひご利用ください。
+            </p> <!--
+            <h3 class="index-subtitle"><div href="{% url 'wiki:root' %}">新入生向けWiki</div></h3>
+            <p>
+                　都立大生有志で新入生向け向け情報をまとめた<a href="{% url 'wiki:root' %}">新入生向けWiki</a>を制作しています。新入生の皆さんはぜひご利用ください。
+            </p>
+            <h3 class="index-subtitle"><div href="{% url 'qanda:index' %}">新入生向けQ&A投稿ページ</div></h3>
+            <p>
+                　上記新入生Wikiに付随して新入生が気軽に先輩に質問できるよう<a href="{% url 'qanda:index' %}">新入生向けQ&A投稿ページ</a>を設けました。
+            </p>-->
+            <div class="ui items">
+                <div class="ui item">
+                    <a href="{% url 'review:index' %}" class="ui fluid teal basic button" id="index-botton"><h4>トップへ戻る</h4></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

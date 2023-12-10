@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}石池とは | Ishiike{% endblock %}
+{% load static %}
+{% block contents %}
+<div class="about">
+    <div class="about-wrapper">
+        <div class="about-detail">
+            <h1 class="about-title">石池 | Ishiike とは</h1>
+            <p>
+                　非公式の都立大生向け情報共有サイトです。学生個人で運営しています。作成にあたって学校に許可などは取っていません。アナーキーなものとして捉えてください。
+            </p>
+            <h1 class="about-title">作成にあたる経緯</h1>
+            <p>
+                　大抵の場合、新入生は様々なサークルなどの新歓に行って先輩たちから授業などの学校生活の情報を得ます。しかしそれができるのはある程度外向性のある人達です。ましてや最近では某ウイルスのおかげでほとんどの新入生がそのような情報を得ることが難しい状況です。
+                そのような状況を少しでも改善できればという思いでこのようなサイトを運営しております。
+            </p>
+            <h1 class="about-title">管理人の気持ち</h1>
+            <p>
+                　今日ではコロナ禍が明け、新歓イベントなどを行うことが出来るようになりました。しかしながら新入生にとって履修登録や学校生活の不安が消えることはありません。
+                現在の石池には書類上では分からない有益な情報が多く集まっています。これらの情報に簡単にアクセス出来る石池はこれからも存続させる価値があると考えております。
+                今後も集合知としての役割を果たせるよう運営を続けていきたいと思っております。
+            </p>
+            <h1 class="about-title">開発に参加する</h1>
+            <p>
+                開発・運営に興味のある人は<a href="https://twitter.com/ishiike_">こちら</a>までご連絡ください。PythonのwebフレームワークであるDjangoで開発しています。GitHubのレポジトリは以下になります。<br>
+                <a href="https://github.com/Atotti/Ishiike">GitHub(現在非公開)</a>
+            </p>
+            <h1 class="about-title">連絡先</h1>
+            <p>
+                投稿の削除・修正、当サイトの改善や要望については<a href="https://twitter.com/ishiike_">こちら</a>までご連絡ください。<br>
+            </p>
+            <div class="ui items">
+                <div class="ui item">
+                    <a href="{% url 'review:index' %}" class="ui fluid teal basic button" id="index-botton"><h4>トップへ戻る</h4></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

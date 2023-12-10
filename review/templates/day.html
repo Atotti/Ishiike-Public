@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}{{day.day}} | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui breadcrumb">
+            <a class="section">クチコミリスト</a>
+            >
+            <a class="active section">{{day.day}}曜日</a>
+        </div>
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>{{day.day}}曜日の授業のクチコミ</h3></div>
+                    <div class="ui divided items">
+                        {% if review_list %}
+                        {% for review in review_list %}
+                        <div class="item">
+                            <div class="content">
+                                <div class="header">
+                                    <a href="{% url 'review:review' pk=review.id %}"><h4>{{review.title}}</h4></a>
+                                </div>
+                                <div class="meta">
+                                    <span class="name">{{review.semester}}</span>
+                                    <span class="name">{{review.day}}</span>
+                                    <span class="name">{{review.period}}</span>
+                                    <span class="date">{{review.created_at}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="ui warning message">
+                        この曜日のクチコミはありません
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+</div>
+{% endblock %}

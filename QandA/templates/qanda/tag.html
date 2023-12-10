@@ -1,0 +1,75 @@
+{% extends 'qanda/qandabase.html' %}
+{% block title %}質問一覧 | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui container" style="margin-top:2%;">
+    {% if request.user_agent.is_mobile %}
+    <div class="ui four item menu">
+    {% else %}
+    <div class="ui menu">
+    {% endif %}
+        <a class="item" href="{% url 'qanda:index' %}">
+        Home
+        </a>
+        <a class="item active" href="{% url 'qanda:tag_over_view' %}">
+            カテゴリ
+        </a>
+        <a class="item" href="{% url 'qanda:question_list' %}">
+            Q&A一覧
+        </a>
+        <a class="item" href="{% url 'qanda:create_question' %}">
+            質問する
+        </a>
+        <!--
+        <div class="right menu">
+        <div class="item">
+            <div class="ui transparent icon input">
+            <input type="text" placeholder="Q&Aを探す">
+            <i class="search link icon"></i>
+            </div>
+        </div>
+        </div>-->
+    </div>
+</div>
+<div class="ui container" style="min-height:100vh; margin-top:2%;">
+    <div class="ui grid stackable">
+        <div class="eleven wide column">
+            <div class="ui breadcrumb">
+                <a class="section" href="{% url 'qanda:tag_over_view' %}">カテゴリ</a>
+                >
+                <a class="active section">{{tag.tag}}のカテゴリ</a>
+            </div>
+            <div class="ui segment">
+                <div class="content">
+                    <div class="header"><h3>{{tag.tag}}のカテゴリのQ&A</h3></div>
+                        <div class="ui divided items">
+                            {% if question_list %}
+                            {% for qanda in question_list %}
+                            <div class="item">
+                                <div class="content">
+                                    <div class="header">
+                                        <a href="{% url 'qanda:question' pk=qanda.id %}"><h4>{{ qanda.content | truncatechars:40}}</h4></a>
+                                    </div>
+                                    <div class="description">{{ qanda.anser | truncatechars:20}}</div>
+                                    <div class="meta">
+                                        <span class="name"><div class="ui label">{{ qanda.tag }}</div></span>
+                                        <span class="date">{{ qanda.created_at }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="ui warning message">
+                            このカテゴリのクチコミはありません
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not request.user_agent.is_mobile %}
+            {% include 'qanda/qanda_sidebar.html' %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

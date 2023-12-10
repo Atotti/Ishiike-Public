@@ -1,0 +1,24 @@
+{% extends "wiki/base_site.html" %}
+{% load static %}
+{% block wiki_site_title %} - wiki{% endblock %}
+
+{% block wiki_header_branding %}
+<a class="navbar-brand" href="/welcome/">2024新入生向けWiki </a>
+{% endblock %}
+
+{% block wiki_header_navlinks %}
+{% if request.user_agent.is_mobile %}
+<ul class="nav navbar-nav">
+  <li class="active"><a href="{% url 'review:index' %}">石池トップ</a></li>
+</ul>
+{% else %}
+<ul class="nav navbar-nav">
+  <li class="active">　<a type="button" class="btn btn-success" href="{% url 'review:index' %}">石池トップ</a>　</li>
+</ul>
+{% endif %}
+{% if request.user_agent.is_mobile %}
+<ul class="nav navbar-nav">
+    <li class="active"><a href="{% url 'qanda:index' %}">質問箱</a></li>
+</ul>
+{% endif %}
+{% endblock %}

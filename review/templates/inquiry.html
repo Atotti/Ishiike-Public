@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}お問い合わせ | Ishiike{% endblock %}
+
+{% block active_inquiry %}active{% endblock %}
+
+{% block contents %}
+<div class="ui grid stackable">
+    <div class="eleven wide column">
+        <div class="ui segment">
+            <div class="content">
+                <div class="header"><h3>お問い合わせ</h3></div>
+                <form class="ui form" method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                        <div>
+                            <label for="{{ field.id_for_label }}">
+                                <strong>{{ field.label_tag }}</strong>
+                            </label>
+                            <div>
+                                {{ field }}
+                                {{ field.errors }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div>
+                        <button class="ui button" type="submit">送信</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% include 'sidebar.html' %}
+</div>
+{% endblock %}

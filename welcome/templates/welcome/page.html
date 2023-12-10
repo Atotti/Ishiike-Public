@@ -1,0 +1,7 @@
+{% extends 'welcome/base.html' %}
+{% block title %}新入生向けサイト{% endblock %}
+{% block contents %}
+{% autoescape off %}
+	{{ items }}
+{% endautoescape %}
+{% endblock %}

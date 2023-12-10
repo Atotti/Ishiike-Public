@@ -1,0 +1,123 @@
+{% extends 'qanda/qandabase.html' %}
+{% block title1 %}{{review.title}}{% endblock %}
+{% block title %}{{review.title}} | Ishiike{% endblock %}
+
+{% block contents %}
+<div class="ui container" style="margin-top:2%;">
+    {% if request.user_agent.is_mobile %}
+    <div class="ui four item menu">
+    {% else %}
+    <div class="ui menu">
+    {% endif %}
+        <a class="item" href="{% url 'qanda:index' %}">
+        Home
+        </a>
+        <a class="item" href="{% url 'qanda:tag_over_view' %}">
+            カテゴリ
+        </a>
+        <a class="item" href="{% url 'qanda:question_list' %}">
+            Q&A一覧
+        </a>
+        <a class="item" href="{% url 'qanda:create_question' %}">
+            質問する
+        </a>
+        <!--
+        <div class="right menu">
+        <div class="item">
+            <div class="ui transparent icon input">
+            <input type="text" placeholder="Q&Aを探す">
+            <i class="search link icon"></i>
+            </div>
+        </div>
+        </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="ui container" style="min-height:100vh; margin-top:2%;">
+    <div class="ui grid stackable">
+        <div class="eleven wide column">
+            <div class="ui breadcrumb">
+                <a href="{% url 'qanda:question_list' %}" class="section">Q&A一覧</a>
+                >
+                <!--<i class="right angle icon divider"></i>-->
+                <a class="active section">Q&A詳細</a>
+            </div>
+            <div class="ui segment">
+                <div class="content">
+                    <div class="ui divided items">
+                        <div class="header">
+                            <h3>質問内容</h3>
+                        </div>
+                        <p>{{qanda.tag}} - {{qanda.created_at}}</p>
+                        <div class="ui segment">
+                            <div style='font-family: "Segoe UI",Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;'>{{qanda.content | linebreaks}}</div>
+                        </div>
+                        <br><div class="item"></div>
+                        <div class="header"><h3>回答</h3></div>
+                            <p>{{qanda.tag}} - {{qanda.created_at}}</p>
+                        <div class="ui segment">
+                            <div style='font-family: "Segoe UI",Meiryo,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;'>{{qanda.anser | linebreaks}}</div>
+                        </div>
+                        <div class="ui right aligned grid">
+                            <div class="wide column">
+                                <div class="vote_button" style="cursor: pointer;" data-review-id="{{review.id}}" data-count="{{review.vote_count}}">
+                                    <div class="ui labeled button" tabindex="0">
+                                        <div class="ui button">
+                                            <i class="heart icon"></i> 参考になった
+                                        </div>
+                                        <a class="ui basic label">
+                                            <span class="vote_counter">
+                                                {% if qanda.vote_count > 0 %}{{qanda.vote_count}}{% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui right aligned grid">
+                <div class="wide column">
+                    <a class="ui twitter button" href="https://twitter.com/intent/tweet?text=『{{qanda.anser}}』 &via=ishiike_ &hashtags=石池&url={{ request.scheme }}://{{ request.get_host }}/qanda/{{qanda.id}}" target="_blank">
+                        <i class="twitter icon"></i>
+                        共有
+                    </a>
+                </div>
+            </div>
+            <!-- コメント表示 -->
+            <div class="ui segment">
+                <div class="header"><h3>コメント</h3></div>
+                {% if comment_list %}
+                <div class="ui relaxed divided list">
+                {% for comment in comment_list %}
+                    <div class="item">
+                        <div class="content">
+                            <div class="description"><font color="gray" size="2">{{comment.no}} : {{comment.created_at}}</font></div>
+                            <p>{{comment.comment | linebreaks}}</p>
+                        </div>
+                    </div>     
+                {% endfor %}
+                </div>
+                {% else %}
+                <p>まだコメントはありません</p>
+                {% endif %}
+            </div>
+            <!-- コメント表示終わり -->
+            <!-- コメント投稿 -->
+            <div class="ui segment">
+                <form class="ui form" action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="ui button orange" type="submit">コメントする</button>
+                </form>
+            </div>
+        </div>
+        {% if not request.user_agent.is_mobile %}
+            {% include 'qanda/qanda_sidebar.html' %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
