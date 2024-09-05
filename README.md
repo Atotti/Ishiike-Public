@@ -1,5 +1,5 @@
-# 石池 | Ishiike
-都立大生向け情報共有サイト[石池](https://ishiike.herokuapp.com/)
+# [石池 | Ishiike](https://ishiike.herokuapp.com/)
+都立大生向け情報共有サイト
 
 ## なんのためのサイトか
 - コロナで新歓イベントが無く先輩から授業のことを聞けない新入生の不安感を軽くする
